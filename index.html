@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Situs Interaktif Saya</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: #007bff;
+            border-radius: 4px;
+        }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 80%;
+            left: 10%;
+        }
+        .container {
+            max-width: 960px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s ease;
+        }
+        .container.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .container p.justify {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        .contact-info {
+            list-style-type: none;
+            padding: 0;
+        }
+        .contact-info li {
+            margin-bottom: 10px;
+            display: flex;
+        }
+        .contact-info li span:first-child {
+            display: inline-block;
+            width: 70px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            background-color: #333;
+            color: white;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        h2 {
+            position: relative;
+            display: inline-block;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: #007bff;
+            transition: width 0.3s ease;
+        }
+        h2:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Selamat Datang di Situs Saya</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#" data-page="home" class="active">Beranda</a></li>
+            <li><a href="#" data-page="about">Tentang Kami</a></li>
+            <li><a href="#" data-page="services">Layanan</a></li>
+            <li><a href="#" data-page="contact">Kontak</a></li>
+        </ul>
+    </nav>
+
+    <div class="container" id="content">
+        <h2>Halaman Beranda</h2>
+        <p>Selamat datang di halaman beranda situs interaktif ini. Di sini Anda bisa menemukan informasi terbaru dan hal-hal menarik lainnya.</p>
+        <p>Ini adalah demo sederhana penggunaan JavaScript untuk navigasi halaman.</p>
+    </div>
+
+    <footer>
+        <p>&copy; <span id="current-year"></span> Situs Interaktif Saya. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Fungsi untuk animasi fade out
+        function fadeOut(element, callback) {
+            element.classList.add('hidden');
+            setTimeout(callback, 500); // Sesuaikan dengan durasi transisi CSS
+        }
+
+        // Fungsi untuk animasi fade in
+        function fadeIn(element) {
+            element.classList.remove('hidden');
+            element.classList.add('fade-in');
+            setTimeout(() => {
+                element.classList.remove('fade-in');
+            }, 500);
+        }
+
+        // Fungsi untuk mengubah konten berdasarkan halaman yang dipilih
+        function loadPage(page) {
+            const contentDiv = document.getElementById('content');
+            
+            // Update menu aktif dengan animasi
+            document.querySelectorAll('nav a').forEach(link => {
+                if (link.classList.contains('active')) {
+                    link.classList.remove('active');
+                }
+                if (link.getAttribute('data-page') === page) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Animasi fade out sebelum mengganti konten
+            fadeOut(contentDiv, () => {
+                // Update konten berdasarkan halaman
+                switch(page) {
+                    case 'home':
+                        contentDiv.innerHTML = `
+                            <h2>Halaman Beranda</h2>
+                            <p class="justify">Halo, Dunia! Selamat datang di kanvas digital-ku, di mana setiap piksel bercerita tentang perjalanan hidup dan impian yang kujaga.</p>
+                            <p class="justify">Awalnya, halaman ini lahir dari sebuah bisikan cinta yang ingin kupersembahkan pada seseorang yang sangat spesial, Elsa Hermiza al ayyubi. Dialah motivasi terbesarku untuk merajut setiap ide gila dan perjuangan manis demi mewujudkan janji suci di tahun 2028 nanti.Setiap baris kode, setiap desain, adalah untaian doa dan semangat membara untuk menyongsong hari itu.</p>
+                            <p class="justify">Namun, selain untaian cinta, di sini juga akan kamu temukan jejak-jejak kreativitas yang selama ini tersimpan rapi. Dulu, aku sering tenggelam dalam dunia editing yang memukau – dari montase video yang berirama hingga sentuhan magis pada setiap foto. Pernah juga melangkah ke alam animasi yang sunyi, menciptakan karakter-karakter hitam-putih yang berdenyut dalam gerak sederhana. Semua ini adalah bagian dari mozaik diriku yang ingin kubagikan, termasuk nanti, untaian cerita di bagian blog dan informasi menarik lainnya yang mungkin bisa menginspirasimu.</p>
+                        `;
+                        break;
+                    case 'about':
+                        contentDiv.innerHTML = `
+                            <h2>Tentang Kami</h2>
+                            <p class="justify">Kami dua jiwa yang dipertemukan oleh takdir dan kini berlayar bersama menuju dermaga impian. Bagian "Tentang Kami" ini bukan sekadar deskripsi, melainkan sebuah catatan perjalanan cinta yang telah kami rajut, dengan benang asa yang kuat untuk mencapai puncak kebahagiaan di tahun 2028.</p>
+                            <p class="justify">Di sini, kami berbagi lebih dari sekadar cerita; kami berbagi visi bersama tentang membangun keluarga yang penuh berkah, berinovasi, dan terus berkreasi. Dari tawa kecil hingga tantangan besar, setiap momen adalah pembentuk karakter dan penguat ikatan kami. Kami percaya, dengan semangat dan doa, setiap langkah yang kami ambil hari ini adalah fondasi kokoh untuk masa depan yang kami impikan bersama.</p>
+                        `;
+                        break;
+                    case 'services':
+                        contentDiv.innerHTML = `
+                            <h2>Jelajahi Dunia Kami: Inspirasi & Karya</h2>
+                            <p class="justify">Bagian "Layanan" ini adalah jendela menuju potensi dan passion yang kami miliki, serta apa yang mungkin bisa kami persembahkan di masa depan. Meskipun halaman ini berawal dari sebuah kisah cinta dan harapan besar untuk pernikahan di 2028, kami juga ingin berbagi kapabilitas dan minat yang mungkin relevan untuk Anda.</p>
+                            <ul>
+                                <li>Portofolio Visual Kreatif</li>
+                                <li>Wawasan & Pemikiran (Blog)</li>
+                                <li>Informasi Bisnis & Kolaborasi (Segera Hadir)</li>
+                                <li>"sedang dalam prosess.."</li>
+                            </ul>
+                            <p>Kami menawarkan berbagai layanan untuk memenuhi kebutuhan digital Teman-teman.</p>
+                        `;
+                        break;
+                    case 'contact':
+                        contentDiv.innerHTML = `
+                            <h2>Hubungi Kami</h2>
+                            <p>Anda dapat menghubungi kami melalui:</p>
+                            <ul class="contact-info">
+                                <li><span>Email</span><span>: </span><a href='mailto:sholahuddinganeshaalayyubi@gmail.com'>sholahuddinganeshaalayyubi@gmail.com</a></li>
+                                <li><span>Telepon</span><span>: </span>(062)813-1708-9030</li>
+                                <li><span>Alamat</span><span>: </span>Cikarang Selatan, Kabupaten Bekasi, Jwabarat, 17530</li>
+                            </ul>
+                        `;
+                        break;
+                    default:
+                        contentDiv.innerHTML = `
+                            <h2>Halaman Tidak Ditemukan (404)</h2>
+                            <p>Maaf, halaman yang Anda cari tidak ada.</p>
+                        `;
+                }
+
+                // Animasi fade in setelah konten diganti
+                fadeIn(contentDiv);
+            });
+
+            // Update URL tanpa reload halaman
+            history.pushState({page: page}, '', `?page=${page}`);
+        }
+
+        // Event listener untuk menu navigasi
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const page = this.getAttribute('data-page');
+                const currentPage = document.querySelector('nav a.active').getAttribute('data-page');
+                
+                // Hanya load halaman jika berbeda dengan halaman saat ini
+                if (page !== currentPage) {
+                    loadPage(page);
+                }
+            });
+        });
+
+        // Fungsi untuk memeriksa parameter URL saat halaman dimuat
+        function checkUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const pageParam = urlParams.get('page') || 'home';
+            loadPage(pageParam);
+        }
+
+        // Handle tombol back/forward browser
+        window.addEventListener('popstate', function(event) {
+            const page = event.state ? event.state.page : 'home';
+            loadPage(page);
+        });
+
+        // Set tahun di footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Jalankan saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', checkUrl);
+    </script>
+</body>
+</html>
